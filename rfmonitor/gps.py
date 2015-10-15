@@ -54,6 +54,12 @@ class GpsDevice(object):
 
     def get_ports(self):
         ports = [port[0] for port in serial.tools.list_ports.comports()]
+            if len(ports) == 0: 
+                if os.name == 'nt':
+                ports.append('COM1') 
+             else: 
+                 ports.append('/dev/ttyAMA0') 
+                 ports.append('/dev/ttyS0') 
         return ports
 
     def get_bauds(self):
